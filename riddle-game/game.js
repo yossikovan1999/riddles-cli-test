@@ -1,6 +1,7 @@
 import originalRiddles from './riddles/riddles.js'
-import { getInput } from './io/playerInput.js';
+import { getInput, whatTypeOfGame, getDificulty } from './io/playerInput.js';
 import { outputStats, guessCorrectMessage } from './io/output.js';
+import handleTypeOfGame from "./utils/utils.js"
 
 
 //=========================================
@@ -28,9 +29,11 @@ function multipleChoiceRiddle(riddle){
      
      const choices = riddle.choices.join(", ");
 
-     const riddleMesage = `Please enter the answer to the multiple choice riddle (answer starts from 0):
-    ${riddle.taskDescription}
-    ${choices}`;
+     const riddleMesage = 
+     `
+     Please enter the answer to the multiple choice riddle (answer starts from 0):
+     ${riddle.taskDescription}
+     ${choices}: `;
 
     const userInput = getInput(riddleMesage);
     
@@ -42,7 +45,9 @@ function multipleChoiceRiddle(riddle){
 function regularRiddle(riddle){
 
 
-    const riddleMesage = `Please enter the answer to the following riddle: ${riddle.taskDescription}`
+    const riddleMesage = `
+    Please enter the answer to the following riddle: 
+    ${riddle.taskDescription}`
     const userInput = getInput(riddleMesage);
 
     return userInput === riddle.correctAnswer;
@@ -87,9 +92,9 @@ function measureSolveTime(func, riddle){
 export default function game(player){
      
     //copy of the original array so we can pop and not affect the original array
-    const riddles = [...originalRiddles];
-
-
+    const riddles = handleTypeOfGame([...originalRiddles]);
+    
+    
     while(riddles.length > 0){
         
         try{
