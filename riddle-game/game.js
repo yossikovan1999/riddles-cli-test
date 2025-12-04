@@ -1,6 +1,6 @@
 import originalRiddles from './riddles/riddles.js'
-import { getInput, outputStats } from './io/playerInput.js';
-
+import { getInput } from './io/playerInput.js';
+import { outputStats, guessCorrectMessage } from './io/output.js';
 
 
 //=========================================
@@ -54,7 +54,7 @@ function askRiddle(riddle){
     
     let correctAnswer = false
     
-    const riddleFunc = riddle.choices ? multipleChoiceRiddle : regularRiddle;
+    const riddleFunc = riddle.choices != undefined ? multipleChoiceRiddle : regularRiddle;
  
 
     while(!correctAnswer){
@@ -65,6 +65,8 @@ function askRiddle(riddle){
             console.log("The answer is not correct please try again!")
         }
     }
+
+    guessCorrectMessage();
 }
 
 //=========================================
