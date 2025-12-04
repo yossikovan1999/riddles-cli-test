@@ -12,7 +12,7 @@ function sortByDifficulty(riddles){
 
     for (const difficulty of dificulties){
         
-        const levelArray = riddles.filter((riddle)=>riddle.difficulty == difficulty);
+        const levelArray = riddles.filter((riddle)=>riddle.difficulty === difficulty);
         sortedRiddles = [...sortedRiddles, ...levelArray];
     } 
 
@@ -25,7 +25,7 @@ function sortByDifficulty(riddles){
 function playSpecificDifficulty(riddles){
     
     const difficulty = getDificulty();
-    return riddles.filter((riddle)=>riddle.difficulty == difficulty);
+    return riddles.filter((riddle)=>riddle.difficulty === difficulty);
 
 }
 
@@ -38,7 +38,7 @@ function playFromSpecificAndUp(riddles){
     //this function firsts filters from a specific index of difficulty and then 
     const difficultyInput = getDificulty();
 
-    const index = dificulties.findIndex((difficulty)=>difficulty == difficultyInput);
+    const index = dificulties.findIndex((difficulty)=>difficulty === difficultyInput);
     const filteredDificulties = dificulties.slice(index, dificulties.length);
 
     return riddles.filter((riddle)=>filteredDificulties.includes(riddle.difficulty))
