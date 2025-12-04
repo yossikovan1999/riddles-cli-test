@@ -1,0 +1,24 @@
+{
+  "name": "riddles_cli_test",
+  "version": "1.0.0",
+  "description": "\"# riddles-cli-test\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yossikovan1999/riddles-cli-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/yossikovan1999/riddles-cli-test/issues"
+  },
+  "homepage": "https://github.com/yossikovan1999/riddles-cli-test#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
