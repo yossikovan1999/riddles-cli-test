@@ -1,21 +1,20 @@
 import originalRiddles from './riddles/riddles.js'
-import { getInput } from './io/playerInput.js';
+import { getInput, outputStats } from './io/playerInput.js';
 
 
 
 //=========================================
-//
+//             show Stats
 //=========================================
 function showStats(player){
 
     const totalSeconds = player.times.reduce((count, num) => count + num, 0);
-
-    console.log(`The average time per riddle: ${totalSeconds}`);
-    console.log(`The total time is: ${totalSeconds}`);
+    const average = totalSeconds / player.times.length;
+    outputStats(totalSeconds, average);
 }
 
 //=========================================
-//
+//          add Solved Time
 //=========================================
 function addSolvedTime(player, seconds){
 
@@ -23,7 +22,7 @@ function addSolvedTime(player, seconds){
 }
 
 //=========================================
-//
+//       multiple Choice Riddle
 //=========================================
 function multipleChoiceRiddle(riddle){
      
@@ -38,7 +37,7 @@ function multipleChoiceRiddle(riddle){
     return userInput === riddle.correctAnswer;
 }
 //=========================================
-//
+//           regular Riddle
 //=========================================
 function regularRiddle(riddle){
 
@@ -49,7 +48,7 @@ function regularRiddle(riddle){
     return userInput === riddle.correctAnswer;
 }
 //=========================================
-//
+//            ask Riddle
 //=========================================
 function askRiddle(riddle){
     
@@ -69,23 +68,19 @@ function askRiddle(riddle){
 }
 
 //=========================================
-//
+//         measure SolveTime
 //=========================================
 function measureSolveTime(func, riddle){
     
-    const date = new Date();
-
-    const startTime = date.getSeconds();
-    console.log(startTime);
+    const startTime = new Date().getSeconds();
     func(riddle);
-    const endTime = date.getSeconds();
-    console.log(endTime);
-    
+    const endTime =  new Date().getSeconds();
+
     return endTime - startTime;
 }
 
 //=========================================
-//
+//                  game
 //=========================================
 export default function game(player){
      
@@ -95,10 +90,13 @@ export default function game(player){
 
     while(riddles.length > 0){
         
-        const riddle = riddles.pop();
-        const time = measureSolveTime(askRiddle, riddle);
-        console.log(time);
-        addSolvedTime(player, time);
+        try{
+            const riddle = riddles.pop();
+            const time = measureSolveTime(askRiddle, riddle);
+            addSolvedTime(player, time);
+        }catch(error){
+             console.error("Error Occured in the current Round: moving to the next riddle", error.message);
+        }
     }
 
     showStats(player); 
